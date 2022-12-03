@@ -1,0 +1,6 @@
+#+STARTUP: content
+#+TITLE: Unix基础知识
+#+DATE: <2022-06-18 Sat 17:23>
+#+CATEGORY: Unix
+
+* Unix基础知识

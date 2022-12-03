@@ -1,0 +1,38 @@
+* 全局函数
+** fboundp
+判断是否有函数的名字与给定的符号绑定。
+#+begin_src lisp
+(fboundp '+)
+#+end_src
+** symbol-function
+返回给定符号绑定的函数
+#+begin_src lisp
+(symbol-function '+)
+#+end_src
+配合 setf 可以实现给匿名函数命名
+#+begin_src lisp
+(setf (symbol-function 'add2)
+      #'(lambda (x) (+ x 2)))
+#+end_src
+** 自定义 setf 函数
+通过把 defun 的第一个实参变成(setf func)这种形式，就定义了当调用 setf 时第一个参数是 func 函数时会发生的事。
+#+begin_src lisp
+;; 在这种形式的函数定义中，参数列表中的第一个实参val是 setf 的新值，后面其余实参都会传给 primo
+(defun (setf primo) (val lst)
+  (setf (car lst) val))
+
+(let ((x (list 'a 'b 'c)))
+  (setf (primo x) 480)
+  x)
+#+end_src
+** 函数文档字符串
+如果函数的第一个表达式是字符串，那么这个字符串会变成函数的文档字符串。可以使用 documentation 来获取
+#+begin_src lisp
+(defun foo (x)
+  "Implements an enhanced paradigm of diversity"
+  x)
+
+(documentation 'foo 'function)
+#+end_src
+
+* 局部函数
